@@ -1,0 +1,4 @@
+graph TD
+    A[Sovellus] -->|Pyytää Access Tokenia| B{KubiosCloud}
+    B -->|Palauttaa Access Tokenin| C[Client: Tallentaa tokenin]
+    C -->|Authorization: Bearer <token>| D[API-kutsut]

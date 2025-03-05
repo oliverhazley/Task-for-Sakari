@@ -1,0 +1,28 @@
+graph TD;
+    subgraph Client [Käyttäjän laite]
+        UI[React Frontend] -->|Käyttäjän toiminnot| Auth[Autentikaatio]
+        UI --> HRV[HRV-seuranta]
+        UI --> Games[Tetris & Mindfulness]
+        UI --> Exercises[Hengitys- ja mindfulness-harjoitukset]
+        UI --> Settings[Asetukset ja laiteyhteydet]
+    end
+
+    subgraph Server [Backend Node.js / Express]
+        Auth[Autentikaatio] -->|Tokenit & sessiot| DB[Mariadb]
+        HRV -->|HRV-datan tallennus| DB
+        Games -->|Pelidatan tallennus| DB
+        Exercises -->|Harjoitusdatan tallennus| DB
+        Settings -->|Laitetiedot & käyttäjäasetukset| DB
+    end
+
+    subgraph External Devices [Ulkoiset laitteet]
+        HRV_Device[Polar H10 / Oura] -->|Bluetooth| UI
+    end
+
+    subgraph Database [Tietokanta]
+        DB[(MariaDB)]
+    end
+
+    Client -- API kutsut --> Server
+    Server -- Tallennus & haku --> Database
+    UI -- Bluetooth --> HRV_Device

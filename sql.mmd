@@ -1,0 +1,18 @@
+
+%% KubiosCloud Authentication Flowchart
+
+graph TD
+    %% OpenID Connect Authentication Flow
+    subgraph OpenID Connect Flow
+        A[Käyttäjä] -->|Kirjautuminen| B[Autentikointi palvelimella]
+        B -->|Tarkistaa tunnukset| C{KubiosCloud}
+        C -->|Palauttaa Access Tokenin| D[Client: Tallentaa tokenin]
+        D -->|Authorization: Bearer <token>| E[API-kutsut]
+    end
+
+    %% Client Credentials Grant Flow
+    subgraph Client Credentials Flow
+        F[Sovellus] -->|Pyytää Access Tokenia| G{KubiosCloud}
+        G -->|Palauttaa Access Tokenin| H[Client: Tallentaa tokenin]
+        H -->|Authorization: Bearer <token>| I[API-kutsut]
+    end

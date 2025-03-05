@@ -1,0 +1,6 @@
+
+graph TD
+    A[Käyttäjä] -->|Kirjautuminen| B[Autentikointi palvelimella]
+    B -->|Tarkistaa tunnukset| C{KubiosCloud}
+    C -->|Palauttaa Access Tokenin| D[Client: Tallentaa tokenin]
+    D -->|Authorization: Bearer <token>| E[API-kutsut]
